@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+    template="/templates/template.xhtml">
+<ui:define name="title">
+  Manage User Account
+</ui:define>
+<ui:define name="content">
+
+<h1 class="title">Add User Account</h1>
+<div align="center">
+<fieldset>
+<legend>Add User</legend>
+<h:form  >
+ Select user type: <h:selectOneRadio value="#{user.usertype}">
+   	<f:selectItem itemValue="Student" itemLabel="Student" />
+   	<f:selectItem itemValue="Instructor" itemLabel="Instructor" />
+   	<f:selectItem itemValue="Grader" itemLabel="Grader" />
+</h:selectOneRadio><br/> 
+Name: <h:inputText value="#{user.name}"></h:inputText><br/>
+Surname: <h:inputText value="#{user.surname}"></h:inputText><br/>
+Gender: <h:selectOneRadio value="#{user.gender}">
+   	<f:selectItem itemValue="M" itemLabel="Male" />
+   	<f:selectItem itemValue="F" itemLabel="Female" />
+</h:selectOneRadio><br/> 
+Mail: <h:inputText value="#{user.mail}"></h:inputText><br/>
+University ID: <h:inputText value="#{user.univ_n}"></h:inputText><br/>
+Account State: <h:selectOneRadio value="#{user.state}">
+   	<f:selectItem itemValue="Active" itemLabel="Active" />
+   	<f:selectItem itemValue="Close" itemLabel="Close" />
+</h:selectOneRadio><br/> 
+
+<h:commandButton value="Create New User" action="#{user.newuser}"></h:commandButton>
+<h3><h:outputText value="#{user.account_s}" id="userID1"></h:outputText></h3>
+</h:form>
+</fieldset>
+</div>
+
+</ui:define>
+</ui:composition>

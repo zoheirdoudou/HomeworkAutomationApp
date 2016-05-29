@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<title>Welcome "#{someBean.someProperty}" to Homework Application </title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
+<script src="./scripts/utils.js" type="text/javascript"></script>
+</h:head>
+<h:body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+
+<div align="right">
+<h:form >
+<h5 align="right">#{someBean.useraut.name} #{someBean.useraut.surname}</h5> <br/>
+<h:commandButton value="Log Out" action="#{someBean.logout}"> </h:commandButton>
+</h:form>
+</div>
+
+<h1 class="title">You can do this jobs</h1>
+<div align="center">
+<fieldset>
+<legend>Manage User</legend>
+<h:form>
+  <!-- Calls "someOtherActionControllerMethod" and uses return value as base name of page to navigate to. -->
+	<h:selectOneRadio value="#{admin_task.manage_user}">
+   	<f:selectItem itemValue="add" itemLabel="Add User Account" />
+   	<f:selectItem itemValue="modify" itemLabel="Modify User Status" />
+   	</h:selectOneRadio>
+  <br/>  
+	<h:commandButton value="Manage User" action="#{admin_task.manageuser}"></h:commandButton>
+	    
+</h:form>
+</fieldset>
+<br/>
+</div>
+
+</h:body></html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+
+	<title>Modify Homework</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
+<script src="./scripts/utils.js" type="text/javascript"></script>
+
+</h:head>
+<h:body>
+
+<div align="right">
+<h:form>
+<h5>#{someBean.useraut.name} #{someBean.useraut.surname}</h5> 
+<h:commandButton value="Log Out" action="#{someBean.logout}"> </h:commandButton><br/>
+<h:commandButton value="Go Back" action="#{back.returnback}"></h:commandButton>
+</h:form>
+</div>
+
+<h1 class="title">Modify Existing Homework</h1>
+<div align="center">
+<fieldset>
+<legend>Modify Homework</legend>
+
+
+<h:form id="courseform" >
+<h:commandButton value="List Courses"  action="#{createCourse.searchcourse}">
+<f:ajax  render="@form"></f:ajax>
+</h:commandButton>
+
+<h:dataTable border="1" value="#{createCourse.courselist}" var="l" id="Coursesearch"  >
+
+				<h:column>
+				<f:facet name="header">Select Course</f:facet>
+				<i>
+    				<h:selectOneRadio id="radio" valueChangeListener="#{homework.listhomework(l)}"  onclick="dataTableSelectOneRadio(this);">
+    				<f:selectItem itemValue="null"  />
+    				<f:ajax execute="courseform:Coursesearch" render="courseform:homeworkpanel" immediate="true" ></f:ajax>
+    				</h:selectOneRadio>
+    			</i>
+    			
+				</h:column>
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Couse Name</f:facet>
+    				<h:outputText value="#{l.name}" ></h:outputText>
+    				
+    			</h:column>
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Course Code</f:facet>
+    				<!-- row record -->
+  					<!-- row record -->
+    				
+    				<h:outputText value="#{l.code}" ></h:outputText>
+    			</h:column>
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Description</f:facet>
+    				<!-- row record -->
+    				
+    				<h:outputText value="#{l.description}" ></h:outputText>
+    			</h:column>
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Course Status</f:facet>
+    				<!-- row record -->
+    				<!-- row record -->
+    				
+    				<h:outputText value="#{l.status}" ></h:outputText>
+    			</h:column>
+    			<h:column >
+    				<!-- column header -->
+    				<f:facet name="header">Course Semester</f:facet>
+					<!-- row record -->
+    									
+    				<h:outputText value="#{l.semester}"   ></h:outputText>
+     			</h:column>
+    			<h:column>
+    			<f:facet name="header">Grader name</f:facet>
+    			<h:outputText id="grader1" value="#{l.grader.name}"></h:outputText>
+    			</h:column>
+    			<h:column>
+    			<f:facet name="header">Grader Univ_N</f:facet>
+    			<h:outputText id="grader2" value="#{l.grader.univ_n}"></h:outputText>
+    			</h:column>
+    			<h:column >
+    			<f:facet  name="header">Grader Mail</f:facet>
+    			<h:panelGroup id="grader3">
+    			<h:outputText  rendered="true"  value="#{l.grader.mail}"></h:outputText>
+    			</h:panelGroup>
+    			</h:column>  
+</h:dataTable>
+
+
+
+<h:panelGroup id="homeworkpanel">
+<h:panelGroup   >
+<h:dataTable border="1" value="#{homework.homehorkL}" var="g" id="homeworklist"  >
+
+    			<h:column >
+    				<!-- column header -->
+    				<f:facet name="header">Homework Name</f:facet>
+    				
+    				<i>
+    				<h:selectOneRadio id="radio" valueChangeListener="#{homework.edithomework(g)}"  onclick="dataTableSelectOneRadio1(this);">
+    				<f:selectItem itemValue="null"  />
+    				<f:ajax execute="courseform:homeworkpanel" render="@form" immediate="true" ></f:ajax>
+    				</h:selectOneRadio>
+    				</i>
+    				
+    				<!-- <h:selectBooleanCheckbox value="#{g.edit}">
+    				<f:ajax render="@form"></f:ajax>
+    				</h:selectBooleanCheckbox>
+    				</i> -->
+    				<h:inputText value="#{g.name}" required="true" rendered="#{g.edit}" > </h:inputText>
+    				<!-- row record -->
+    				<h:outputText value="#{g.name}" rendered="#{!g.edit}"></h:outputText>
+    				
+    			</h:column>
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Description</f:facet>
+    				<!-- row record -->
+  					<h:inputText value="#{g.description}" required="true" rendered="#{g.edit}" > </h:inputText>
+    				<!-- row record -->
+    				
+    				<h:outputText value="#{g.description}" rendered="#{!g.edit}"></h:outputText>
+    			</h:column>
+    			<h:column>
+    				<!-- column header -->
+    			<f:facet name="header">Start Date</f:facet>
+    				<!-- row record -->
+    				
+   				 <h:panelGrid columns="2" cellpadding="5" rendered="#{g.edit}">
+  				<p:calendar id="datetime1" value="#{g.from_d}" pattern="MM/dd/yyyy HH:mm:ss" />
+                		</h:panelGrid>
+                 		<p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold" rendered="#{g.edit}">
+        			<p:panelGrid id="display1" columns="2" columnClasses="label,value">
+        				<h:outputText value="#{g.from_d}">        
+                		<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+            			</h:outputText>
+   				</p:panelGrid>
+   			 </p:dialog>
+    				<!-- row record -->   				
+    				<h:outputText value="#{g.from_d}" rendered="#{!g.edit}"></h:outputText>
+    			</h:column>
+    			<h:column>
+    			<f:facet name="header">Due Date</f:facet>
+    			<h:panelGrid columns="2" cellpadding="5" rendered="#{g.edit}">
+    			<p:calendar id="datetime2" value="#{g.to_d}" pattern="MM/dd/yyyy HH:mm:ss" />
+    			</h:panelGrid>
+    			<p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold" rendered="#{g.edit}">
+    			<p:panelGrid id="display2" columns="2" columnClasses="label,value">
+        				<h:outputText value="#{g.to_d}">        
+                		<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+            			</h:outputText>
+   			</p:panelGrid>
+    			</p:dialog>
+    			<h:outputText value="#{g.to_d}" rendered="#{!g.edit}"></h:outputText>
+			</h:column>
+    		<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Homework Status</f:facet>
+    				<!-- row record -->
+    				<h:selectOneRadio value="#{g.status}" required="true" rendered="#{g.edit}">
+    				<f:selectItems value="#{homework.statusL}"></f:selectItems>
+    				</h:selectOneRadio>
+    				<!-- row record -->
+    				
+    				<h:outputText value="#{g.status}" rendered="#{!g.edit}"></h:outputText>
+    			</h:column>
+    			<h:column>
+    			<f:facet name="header">Files</f:facet>
+				
+				<p:fileUpload  rendered="#{g.edit and (3-g.number_f)>0}"  fileUploadListener="#{homework.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                  multiple="true" update="messages"  sizeLimit="100000000" fileLimit="#{3-g.number_f}" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|docx|txt)$/" />
+		         
+    			<p:growl id="messages" showDetail="true" />
+	
+				
+										
+				
+				<h:dataTable value="#{g.filename}" border="1" var="f">		 			
+   				
+    			<h:column  styleClass="wrap">
+    			
+    			<h:outputText value="#{f}"></h:outputText>
+    			
+     			</h:column>
+    			<h:column>
+    			<h:commandButton value="Download" action="#{homework.Download(f,g,'homework/')}" rendered="#{!g.edit}"> </h:commandButton>
+    			<h:commandButton value="Delete" rendered="#{g.edit}" action="#{homework.deletefile(f,g)}">
+    			<f:ajax render="courseform:homeworkpanel" execute="@form"  /></h:commandButton>
+    			</h:column>
+    			</h:dataTable>
+    			
+    			
+    			</h:column>
+    			<h:column>
+    			<h:commandButton value="Save" action="#{homework.modifyHomework(g)}">
+    			
+    			<f:ajax render="courseform:homeworkpanel" execute="@form"/> </h:commandButton><br/>
+     			 	
+     			 </h:column>
+     			 		   
+</h:dataTable>
+<h:outputText value="#{homework.insert_s}" rendered="#{!g.edit}" > </h:outputText>
+</h:panelGroup>
+</h:panelGroup>
+</h:form>
+</fieldset>
+</div>
+
+
+
+</h:body>
+</html>
+
+

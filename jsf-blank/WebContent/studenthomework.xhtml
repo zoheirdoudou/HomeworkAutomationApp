@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+
+	<title>Submit and View Homework</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
+<script src="./scripts/utils.js" type="text/javascript"></script>
+
+</h:head>
+<h:body>
+
+<div align="right">
+<h:form>
+<h5>#{someBean.useraut.name} #{someBean.useraut.surname}</h5> 
+<h:commandButton value="Log Out" action="#{someBean.logout}"> </h:commandButton><br/>
+<h:commandButton value="Go Back" action="#{back.returnback}"></h:commandButton>
+</h:form>
+</div>
+
+<h1 class="title">Homework</h1>
+<div align="center">
+<fieldset>
+<legend>Submit Homework</legend>
+
+
+<h:form id="courseform" >
+<h:commandButton value="List Courses"  action="#{createCourse.searchcourse}">
+<f:ajax  render="@form"></f:ajax>
+</h:commandButton>
+
+<h:dataTable border="1" value="#{createCourse.courselist}" var="l" id="Coursesearch"  >
+
+				<h:column>
+				<f:facet name="header">Select Course</f:facet>
+				<i>
+    				<h:selectOneRadio id="radio"  valueChangeListener="#{homework.listhomework(l)}"  onclick="dataTableSelectOneRadio(this);">
+    				<f:selectItem itemValue="null"  />
+    				<f:ajax execute="courseform:Coursesearch" render="courseform:homeworkpanel" immediate="true" ></f:ajax>
+    				</h:selectOneRadio>
+    			</i>
+    			
+				</h:column>
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Couse Name</f:facet>
+    				<h:outputText value="#{l.name}" ></h:outputText>
+    				
+    			</h:column>
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Course Code</f:facet>
+    				<!-- row record -->
+  					<!-- row record -->
+    				
+    				<h:outputText value="#{l.code}" ></h:outputText>
+    			</h:column>
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Description</f:facet>
+    				<!-- row record -->
+    				
+    				<h:outputText value="#{l.description}" ></h:outputText>
+    			</h:column>
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Course Status</f:facet>
+    				<!-- row record -->
+    				<!-- row record -->
+    				
+    				<h:outputText value="#{l.status}" ></h:outputText>
+    			</h:column>
+    			<h:column >
+    				<!-- column header -->
+    				<f:facet name="header">Course Semester</f:facet>
+					<!-- row record -->
+    									
+    				<h:outputText value="#{l.semester}"   ></h:outputText>
+     			</h:column>
+    			<h:column>
+    			<f:facet name="header">Grader name</f:facet>
+    			<h:outputText id="grader1" value="#{l.grader.name}"></h:outputText>
+    			</h:column>
+    			<h:column>
+    			<f:facet name="header">Grader Univ_N</f:facet>
+    			<h:outputText id="grader2" value="#{l.grader.univ_n}"></h:outputText>
+    			</h:column>
+    			<h:column >
+    			<f:facet  name="header">Grader Mail</f:facet>
+    			<h:panelGroup id="grader3">
+    			<h:outputText  rendered="true"  value="#{l.grader.mail}"></h:outputText>
+    			</h:panelGroup>
+    			</h:column>  
+</h:dataTable>
+
+
+<h:panelGroup id="homework">
+<h:panelGroup id="homeworkpanel">
+<h:dataTable border="1" value="#{homework.homehorkL}" var="g" id="homeworklist"  >
+
+    			<h:column >
+    				<i>
+    				<h:selectOneRadio id="radio" valueChangeListener="#{homework.listsubhomeworks(g)}"  onclick="dataTableSelectOneRadio1(this);">
+    				<f:selectItem itemValue="null"  />
+    				<f:ajax  execute="courseform:homeworkpanel" render="courseform:homework" immediate="true" ></f:ajax>
+    				</h:selectOneRadio>
+    				</i>
+    				
+    				<!-- column header -->
+    				<f:facet name="header">Homework Name</f:facet>
+    				
+    				
+    				<!-- row record -->
+    				<h:outputText value="#{g.name}" ></h:outputText>
+    				
+    			</h:column>
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Description</f:facet>
+    				<!-- row record -->
+  					<!-- row record -->
+    				
+    				<h:outputText value="#{g.description}"></h:outputText>
+    			</h:column>
+    			<h:column>
+    				<!-- column header -->
+    			<f:facet name="header">Start Date</f:facet>
+    				<!-- row record -->
+    				
+   					<h:outputText value="#{g.from_d}" ></h:outputText>
+    			</h:column>
+    			<h:column>
+    			<f:facet name="header">Due Date</f:facet>
+    				<h:outputText value="#{g.to_d}" ></h:outputText>
+			</h:column>
+    		<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Homework Status</f:facet>
+    				
+    				<h:outputText value="#{g.status}" ></h:outputText>
+    			</h:column>
+    			<h:column>
+    			<f:facet name="header">Files</f:facet>										
+				
+				<h:dataTable value="#{g.filename}" border="1" var="f">		 			
+   			
+    			<h:column  styleClass="wrap">
+    			
+    			<h:outputText value="#{f}"></h:outputText>
+    			
+     			</h:column>
+    			<h:column>
+    			<h:commandButton value="Download" action="#{homework.Download(f,g)}" > </h:commandButton>
+    			</h:column>
+    			</h:dataTable>
+    			
+    			
+    			</h:column>
+    			<h:column>
+    				<p:fileUpload  rendered="#{g.status=='Open' and g.edit}"  fileUploadListener="#{homework.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                  multiple="true" update="messages"  sizeLimit="100000000" fileLimit="#{1}" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|docx|txt|zip)$/" />
+         			<h:commandButton value="Submit Homework" action="#{homework.submithomework(g)}" rendered="#{g.status=='Open' and g.edit}">
+					<f:ajax render="courseform:status" execute="@this"> </f:ajax>
+         			</h:commandButton>
+    			<p:growl id="messages" showDetail="true" />
+	 				<h:outputText value="Submission Closed" rendered="#{g.status=='Close'}"></h:outputText>
+     			 </h:column>
+     			 		   
+</h:dataTable>
+<h:outputText value="#{homework.insert_s}" id="status"> </h:outputText>
+
+</h:panelGroup>
+<h:panelGroup id="homeworksubmission">
+<h:dataTable value="#{homework.listsubhomework}" var="h" border="1" >
+<h:column>
+					<i>
+    				<h:selectOneRadio  valueChangeListener="#{homework.editsubhomework(g)}" rendered="#{h.status=='submitted'}" onclick="dataTableSelectOneRadio1(this);">
+    				<f:selectItem itemValue="null"  />
+    				<f:ajax execute="courseform:homeworksubmission"  render="courseform:homeworksubmission" immediate="true" ></f:ajax>
+    				</h:selectOneRadio>
+    				</i>
+
+
+</h:column>
+<h:column>
+<f:facet name="header">Submission Status</f:facet>
+<h:outputText value="#{h.status}"></h:outputText>
+</h:column>
+<h:column>
+<f:facet name="header">Grader Comment</f:facet>
+<h:outputText value="#{h.remaraq}" ></h:outputText>
+</h:column>
+<h:column>
+<f:facet name="header">Grade</f:facet> 
+
+<h:outputText value="#{h.grade}" ></h:outputText>
+</h:column>
+<h:column>
+<f:facet name="header">Submitted File</f:facet>
+<h:dataTable border="1" value="#{h.filename}" var="f">
+<h:column>
+<h:outputText value="#{f}"></h:outputText>
+</h:column>
+<h:column>
+<h:commandButton value="Download" action="#{homework.Downloadsub(f,h,'studentsubmission/')}" > </h:commandButton>
+</h:column>
+
+</h:dataTable>
+</h:column>
+<h:column>
+<f:facet name="header">Confirme</f:facet>
+<h:commandButton value="Save" action="#{homework.gradehomework(h)}" rendered="#{h.edit}">
+<f:ajax execute="@this" render="courseform:homeworksubmission"></f:ajax>
+</h:commandButton>
+</h:column>
+</h:dataTable>
+<h:outputText value="#{homework.insert_s}"></h:outputText>
+</h:panelGroup>
+</h:panelGroup>
+
+</h:form>
+</fieldset>
+</div>
+
+
+
+</h:body>
+</html>
+
+

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core">
+<!--  When you make your own projects, copy and rename sample-file-with-form.xhtml
+      or sample-file-no-form.xhtml. Don't copy and rename THIS file, because
+      this file has too many extraneous things in it. -->
+
+<h:head>
+	<title>Manage User Account</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
+<script src="./scripts/utils.js" type="text/javascript"></script>
+</h:head>
+<h:body>
+
+<div align="right">
+<h:form>
+<h5>#{someBean.useraut.name} #{someBean.useraut.surname}</h5> 
+<h:commandButton value="Log Out" action="#{someBean.logout}"> </h:commandButton><br/>
+<h:commandButton value="Go Back" action="#{back.returnback}"></h:commandButton>
+</h:form>
+</div>
+
+<h1 class="title">Modify User Account Status</h1>
+<div align="center">
+<fieldset>
+<legend>Search User By:</legend>
+<h:form  id="AdSearchform">
+Select user type: <h:selectOneRadio value="#{user.usertype}" required="true">
+   	<f:selectItem itemValue="Student" itemLabel="Student" />
+   	<f:selectItem itemValue="Instructor" itemLabel="Instructor" />
+   	<f:selectItem itemValue="Grader" itemLabel="Grader" />
+</h:selectOneRadio><br/> 
+Univ Number: <h:inputText value="#{user.univ_n}"></h:inputText><br/>
+User Name: <h:inputText value="#{user.name}"></h:inputText><br/>
+User Surame: <h:inputText value="#{user.surname}"></h:inputText><br/>
+<h:commandButton  value="Search" action="#{user.adsearchUser}">
+<f:ajax execute="@form"   
+            render="adsearch"
+            onevent="showWorkingIndicator"/>
+ 
+</h:commandButton><br/>
+
+<h2 id="workingIndicator" style="display: none">
+      <img src="./images/ajax-loader.gif"/>
+      Loading data from server...</h2>
+  
+<h:dataTable border="1" value="#{user.userlist}" var="l" id="adsearch"  >
+
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Univ Number</f:facet>
+    				<!-- row record -->
+    				<h:outputText value="#{l.univ_n}"></h:outputText>
+    			</h:column>
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">User Name</f:facet>
+    				<!-- row record -->
+    				<h:outputText value="#{l.name}"></h:outputText>
+    			</h:column>
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">User Surname</f:facet>
+    				<!-- row record -->
+    				<h:outputText value="#{l.surname}"></h:outputText>
+    			</h:column>
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Mail</f:facet>
+    				<!-- row record -->
+    				<h:outputText value="#{l.mail}"></h:outputText>
+    			</h:column>
+    			<h:column >
+    				<!-- column header -->
+    				<f:facet name="header">User Status</f:facet>
+    				 <i>
+    				<h:selectBooleanCheckbox value="#{l.editablestatus}">
+    						<f:ajax render="@form" />
+					</h:selectBooleanCheckbox>
+ 					</i>
+ 					<h:selectOneMenu value="#{l.state}" rendered="#{l.editablestatus}">
+        				<f:selectItems value="#{l.userstatusL}"/>
+      				</h:selectOneMenu>
+			   			
+    				 <!-- row record -->
+    				 <h:commandButton value="Update" action="#{l.update}" rendered="#{l.editablestatus}">
+    				<f:ajax render="@form" execute="@form"/>
+    				</h:commandButton> 
+    				<h:outputText value="#{l.state}" rendered="#{!l.editablestatus}"></h:outputText>
+    			</h:column>
+    			<h:column>
+    			<h:commandButton value="Save" action="#{l.modify(l)}">
+    			<f:ajax render="@form" execute="@form"/> </h:commandButton>
+     			 </h:column>	
+   
+</h:dataTable>
+
+</h:form>
+</fieldset>
+</div>
+
+
+
+
+
+
+</h:body>
+</html>
+
+

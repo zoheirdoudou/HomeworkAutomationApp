@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+<title>JSF 2.2: Blank Starting-Point Project</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
+</h:head>
+<h:body>
+<h1 class="title">Authentication Error</h1>
+<div align="center">
+<fieldset>
+<legend>Authentication Error</legend>
+<h2>You entered "#{someBean.username}"</h2> <br/>
+<h2>You entered "#{someBean.someProperty}"</h2>
+Don't exist
+<h:form>
+  <!-- Calls "someOtherActionControllerMethod" and uses return value as base name of page to navigate to. -->
+  <h:commandButton value="Return to Start Page" 
+                   action="#{someBean.returnindex}"/>     
+</h:form>
+</fieldset>
+<br/>
+</div></h:body></html>

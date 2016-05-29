@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+
+	<title>Create Course</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
+</h:head>
+<h:body>
+
+<div align="right">
+<h:form>
+<h5>#{someBean.useraut.name} #{someBean.useraut.surname}</h5> 
+<h:commandButton value="Log Out" action="#{someBean.logout}"> </h:commandButton><br/>
+<h:commandButton value="Go Back" action="#{back.returnback}"></h:commandButton>
+</h:form>
+</div>
+
+<h1 class="title">Create New Course</h1>
+<div align="center">
+<fieldset>
+<legend>Add Course</legend>
+<h:form  >
+Name : <h:inputText value="#{createCourse.name}" required="true"></h:inputText><br/>
+Course Code: <h:inputText value="#{createCourse.code}" required="true">
+<f:ajax render="@form" execute="@form"/>
+</h:inputText><br/>
+Description: <h:inputTextarea value="#{createCourse.description}" required="true"></h:inputTextarea><br/>
+Semester: <h:selectOneRadio value="#{createCourse.semester}" required="true">
+	<f:selectItems value="#{createCourse.semesterL}"></f:selectItems>
+	</h:selectOneRadio>
+<br/>
+Status: <h:selectOneRadio value="#{createCourse.selstatus}" required="true"> 
+ 						<f:selectItems value="#{createCourse.statusL}"></f:selectItems>
+ 						</h:selectOneRadio><br/>
+<h:commandButton value="Create New Course" action="#{createCourse.createcourse}"></h:commandButton><br/>
+<h:outputText value="#{createCourse.creation_status}"></h:outputText>
+</h:form>
+</fieldset>
+</div>
+
+
+
+
+
+
+</h:body>
+</html>
+
+

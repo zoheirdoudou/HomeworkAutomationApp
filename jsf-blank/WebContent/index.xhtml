@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<!--  When you make your own projects, copy and rename sample-file-with-form.xhtml
+      or sample-file-no-form.xhtml. Don't copy and rename THIS file, because
+      this file has too many extraneous things in it. -->
+
+<h:head>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+	<script src="hash.js" type="text/javascript" charset="utf-8"></script>
+
+	<title>Homework Application</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
+</h:head>
+<h:body>
+<h1 class="title">Welcome Homework Application</h1>
+<div align="center">
+
+<fieldset><legend>You must Identify</legend>
+<h:form  >
+  You Sign In As   <h:selectOneRadio value="#{someBean.someProperty}">
+        <f:selectItems value="#{someBean.usertype}"/>
+      </h:selectOneRadio><br/>
+  Username: <h:inputText  id="username" required="true" value="#{someBean.username}"
+  			requiredMessage="Please enter your username."
+			validatorMessage="Invalid username format"
+			 >
+		 <f:validateRegex for="username" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" /></h:inputText>
+  			<br/>
+  			<p:watermark for="username" value="Enter Username" />  			
+  			Password: <h:inputSecret id="password" value="#{someBean.passwd}" required="true"/><br/>
+  			<h:message for="username"   display="icon" /><br/>
+  			
+  			
+  <!-- Calls "someActionControllerMethod" and uses return value as base name of page to navigate to. -->
+    <h:commandButton type="submit" value="Sign In" action="#{someBean.someActionControllerMethod}" icon="ui-icon-check"></h:commandButton>
+  <h3><h:outputText value="#{someBean.status}" id="auth1"></h:outputText></h3>     
+</h:form>
+</fieldset>
+</div>
+
+
+
+
+
+</h:body>
+</html>
+
+

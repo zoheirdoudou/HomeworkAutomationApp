@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><link type="text/css" rel="stylesheet" href="/jsf-blank/javax.faces.resource/theme.css.jsf?ln=primefaces-aristo" /><script type="text/javascript" src="/jsf-blank/javax.faces.resource/jsf.js.jsf?ln=javax.faces&amp;stage=Development"></script><link type="text/css" rel="stylesheet" href="/jsf-blank/javax.faces.resource/primefaces.css.jsf?ln=primefaces&amp;v=5.1" /><script type="text/javascript" src="/jsf-blank/javax.faces.resource/jquery/jquery.js.jsf?ln=primefaces&amp;v=5.1"></script><script type="text/javascript" src="/jsf-blank/javax.faces.resource/jquery/jquery-plugins.js.jsf?ln=primefaces&amp;v=5.1"></script><script type="text/javascript" src="/jsf-blank/javax.faces.resource/primefaces.js.jsf?ln=primefaces&amp;v=5.1"></script>
+
+	<title>Modify Homework</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css" /> 
+<script src="./scripts/utils.js" type="text/javascript"></script></head><body>
+
+<div align="right">
+<form id="j_idt6" name="j_idt6" method="post" action="/jsf-blank/modifyhomework.jsf" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt6" value="j_idt6" />
+
+<h5>zoheir doudou</h5><input type="submit" name="j_idt6:j_idt8" value="Log Out" /><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0" value="Dn6ro+WaTURGJIhl0wrh5XhutcWZUKhoLmV6s4seMPL1ys4owfbvsGdbuGXEGXvMv6nYw5SRVsNZ+zXMeUvI/m3tQyx/0UjYl5wrZcvjhS7Q4WXIqv4Pwvp8HsUSVW6Utm4oBY3nYcwknGY3Tox+D67WkmpJl9Kws1bc4YjGtcZUrVRRGOgZsfAue6Wy2C1JWgVOlLD9mrZAWoJo4fQkNslU0m39bqN8X5qa86eqfVUWkPeWEhrrfRjyDdADboFOBs2JmcczfG22uNdqYqnrpTj8l50ty4fd/74U4tqqFwkaB3xNAr/dWNecad6Gp+Wt/G/+00H+dcqjZwFBAP9XhedkwBNTYNMtmCYYtlsyOWo+2SnzQ/YmQs/IHV62E+MHtRFKYXlU/mAHuRM1y2jQPPL5CJSzgbQ6jvP8PfmkON+qgTZGeYtfCzd/pvVPFFBSPLYkgqtsgRj7wr3WE8xcNfI6z1pXUZNfFvEzODT5UfwtIvp+5trUAb+diSrBTGE15uOmemmQUnsHs7ddqjptgcpqW4bmlsAHaS2BAJ7FQPk+s3iSdiQG72U26lxUvpSwIuuIuXf1/L0Gc3r08Kq/sdZOBee5j8qBf1cT9Bn0PJsMofJurKtAXqjEghBLGD5zst2fsTpr3M0Kd+2XnvufNddYoRGky2GiWGjqi6iCfqpVfCN4CKUV9BBehv7JnzBaD1BGId1f6giAcIBQjNzAL3yPfzBl4XsRCM8TIbsafSGaTE8aN/ZK7mkZnWRmjsKV8aT0UZQBdBKf2iYlQhnnaIFVlDchw1X7aZtnqOArh38D1Y+5l12w/wkFgnk2oa32fcaZaCZEObeB4RKBBbFihGf3GCtNZ3G90hJJKHxVD1vMCjGOqYWWQkp1fpjKDek65O7Jt8F7Okn9k+MF3Kh7ZNhRD7r2KevOzL9pFjJ5ZjGUFiuq+bUZDDtw8dYMz8QD8uwtnbFeeNzzWHtZruMV43oTqAJyruH8Ynz5ZVbVlw4=" autocomplete="off" />
+</form>
+</div>
+
+<h1 class="title">Modify Existing Homework</h1>
+<div align="center">
+<fieldset>
+<legend>Modify Homework</legend>
+<form id="courseform" name="courseform" method="post" action="/jsf-blank/modifyhomework.jsf" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="courseform" value="courseform" />
+<input id="courseform:j_idt10" type="submit" name="courseform:j_idt10" value="List Courses" onclick="mojarra.ab(this,event,'action',0,'@form');return false" /><table id="courseform:Coursesearch" border="1">
+<thead>
+<tr>
+<th scope="col">Select Course</th>
+<th scope="col">Couse Name</th>
+<th scope="col">Course Code</th>
+<th scope="col">Description</th>
+<th scope="col">Course Status</th>
+<th scope="col">Course Semester</th>
+<th scope="col">Grader name</th>
+<th scope="col">Grader Univ_N</th>
+<th scope="col">Grader Mail</th>
+</tr>
+</thead>
+<tbody>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+</table>
+<span id="courseform:homeworkpanel"><table id="courseform:homeworklist" border="1">
+<thead>
+<tr>
+<th scope="col">Homework Name</th>
+<th scope="col">Description</th>
+<th scope="col">Start Date</th>
+<th scope="col">Due Date</th>
+<th scope="col">Homework Status</th>
+<th scope="col">Files</th>
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+</table>
+</span><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:2" value="xOUbithvNBAWBgQhKu8XNtGPc8XngoOxT4Fop247UY+lOPXtDR+72FVvnCTPjvO88EIGYFL04/7drUG8C20tMPQ4Iur5LtoVaz0BX0LJ6XfkHwZ+NFvCOZCngJzERUd+PSmrObAClP85NNIkOpD3mwcZA/km7uullqpFXsy5JFR16WpIEy0Uei68KlHwxa8eWACobbIFCPPQRaWeSwW1sw4i1ISaukCfrYzPOC/PK77/+tKK0kcOxTOdPZh76o7r9MkbVtEYoHvJpjWQahmtd/f45LCUytWazgrCiXVuQ3p4paH1o3VhajkiUmILjfgLdHW39x0dmS9rvHyj4/Pr0rFKmtCBVM1p1ZB9ZXu8LwdR8wFBV6NFvhinh4PWdba0WMteRFTnhSVpLYg/wyYMtx7pJ1zQzl8Le+J2nkVN2LY+cxjJFh+17TzIuxfktnIM2TdbQvZupdVdX2gg9kTi/F+jwxcVdv52dqt6Wv4/rDWh0wDPqJ86nMnE1hQA3+8w5Gp3rfDlRD8YIaZ9moZA8orE0c07r0rUTC1J3+KjLNRM6d+j+SmY/Dfwc5i7bcVTz0Vdn0znq5d28rQm0ARsr1n1320i2fMIh0x0fyTykGILUSHLnG9/7VYFVPNw+lSFfAv894o9Pz0F/Ybg02+LgKPWdlDvIGdjq+GoN+axziq+t47MKIIfRDqB4eOU9r/F64qHePdfUVISvGzzgLQ77CB3puOqEDYaNT7W+zK0hUZaw0dmIdZv09lb01qPE72CbuB2pMCmEJJR1Q48KquBTt4ISaf8EVDZPl4JZuob+SI3OvCOlQC8JkMB0pr2GfjZhaqY3WQSx3ouquSYGgCaigPfuMi2gFWMXrfKGUll0EZ6wAvGQOQbi0J4WRkSRF16Z+PVIC3j6irPJ+iqnON2n8757PVIY3zgl0DKEdslwL8=" autocomplete="off" />
+</form>
+</fieldset>
+</div></body>
+</html>

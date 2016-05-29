@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<title>Create Course</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
+<script src="./scripts/utils.js" type="text/javascript"></script>
+</h:head>
+<h:body>
+
+<div align="right">
+<h:form>
+<h5>#{someBean.useraut.name} #{someBean.useraut.surname}</h5> 
+<h:commandButton value="Log Out" action="#{someBean.logout}"> </h:commandButton><br/>
+<h:commandButton value="Go Back" action="#{back.returnback}"></h:commandButton>
+</h:form>
+</div>
+
+<h1 class="title">Create New Homework</h1>
+<div align="center">
+<fieldset>
+<legend>Add Homework</legend>
+<h:form  id="homeworkform" >
+Name : <h:inputText value="#{homework.name}" required="true"></h:inputText><br/>
+Description: <h:inputTextarea value="#{homework.description}" required="true"></h:inputTextarea><br/>
+Status: <h:selectOneRadio value="#{homework.status}" required="true"> 
+ 						<f:selectItems value="#{homework.statusL}"></f:selectItems>
+ 						</h:selectOneRadio><br/>
+<!--  Start date:			<h:inputText id="S_date" value="#{homework.from_d}" 
+					size="20" required="true"
+					label="Receipt Date" >
+							
+					<f:convertDateTime pattern="d-M-yyyy" />
+				  </h:inputText><br/>
+				<h:message for="S_date" style="color:red" /><br/>
+Due date:			<h:inputText id="D_date" value="#{homework.to_d}" 
+					size="20" required="true"
+					label="Receipt Date" >
+							
+					<f:convertDateTime pattern="dd-MMM-yyyy hh:mm:ss a" />
+				  </h:inputText><br/>
+				<h:message for="D_date" style="color:red" /><br/>
+  -->
+  				<p:growl id="msgs" showDetail="true" />
+ 		
+   				 <h:panelGrid columns="2" cellpadding="5">
+  				<p:outputLabel for="datetime1" value="Start Date:" />
+        		<p:calendar id="datetime1" value="#{homework.from_d}" pattern="MM/dd/yyyy HH:mm:ss" />
+        		<p:outputLabel for="datetime2" value="Due Date:" />
+        		<p:calendar id="datetime2" value="#{homework.to_d}" pattern="MM/dd/yyyy HH:mm:ss" />
+                </h:panelGrid>
+                 <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+        		<p:panelGrid id="display" columns="2" columnClasses="label,value">
+        				<h:outputText value="Start Date" />
+            			<h:outputText value="#{homework.from_d}">        
+                		<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+            			</h:outputText>
+            			<h:outputText value="Due Date" />
+            			<h:outputText value="#{homework.to_d}">        
+                		<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+            			</h:outputText>
+   			</p:panelGrid>
+    </p:dialog><br/>
+    					
+Select Course: 
+<h:dataTable border="1" value="#{homework.courselist}" var="l"   >
+
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Couse Name</f:facet>
+    				<i>
+   					<h:selectOneRadio  valueChangeListener="#{homework.selcourse(l)}"  onclick="dataTableSelectOneRadio(this);">
+    				<f:selectItem itemValue="null"  />
+    				<f:ajax execute="@this"></f:ajax>
+    				</h:selectOneRadio>
+    					
+    				</i>
+    				    				<!-- row record -->
+    				<h:outputText value="#{l.name}" ></h:outputText>
+    				
+    			</h:column>
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Course Code</f:facet>
+    				<!-- row record -->
+  					    				<!-- row record -->
+    				
+    				<h:outputText value="#{l.code}" ></h:outputText>
+    			</h:column>
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Description</f:facet>
+    				<!-- row record -->
+    				
+    				<h:outputText value="#{l.description}" ></h:outputText>
+    			</h:column>
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Course Status</f:facet>
+    				<!-- row record -->
+    								<!-- row record -->
+    				
+    				<h:outputText value="#{l.status}" ></h:outputText>
+    			</h:column>
+    			<h:column >
+    				<!-- column header -->
+    				<f:facet name="header">Course Semester</f:facet>
+							<!-- row record -->
+    									
+    				<h:outputText value="#{l.semester}"  ></h:outputText>
+    			</h:column>
+    			  
+</h:dataTable>
+<br/>
+
+    <p:fileUpload  fileUploadListener="#{homework.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                  multiple="true" update="messages"  sizeLimit="100000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|docx|txt)$/" />
+ 
+    <p:growl id="messages" showDetail="true" />
+
+
+<p:commandButton value="Create New Homework" update="msgs" action="#{homework.newhomehork}">
+<f:ajax execute="@form" render="homeworkform:insert_s">
+</f:ajax> </p:commandButton>
+<br/><h:outputText id="insert_s" value="#{homework.insert_s}" rendered="true"  ></h:outputText>
+
+
+</h:form>
+</fieldset>
+</div>
+
+
+
+
+
+
+</h:body>
+</html>
+
+
